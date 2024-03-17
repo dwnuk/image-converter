@@ -9,6 +9,26 @@
 <body>
 
 
+
+    <div class="wrapper">
+        <button id="downloadAllButton" class="download">Download All</button>
+        <div class="layout">
+            <!-- Dropdown menu for output format -->
+            <div class="select-container">
+                <label for="outputFormat">Output Format:</label>
+                <select id="outputFormat">
+                    <option value="jpeg">JPEG</option>
+                    <option value="png">PNG</option>
+                    <option value="webp">WebP</option>
+                </select>
+            </div>
+
+            <div class="dropTarget">
+                <input type="file" multiple accept="image/*">
+            </div>
+        </div>
+    </div>
+
     <script src="./assets/main.js"></script>
 </body>
 </html>
