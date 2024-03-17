@@ -114,3 +114,46 @@ function setDragDrop(area, callback) {
 const dragDropArea = document.querySelector('.dropTarget');
 
 setDragDrop(dragDropArea, processFiles);
+
+function downloadAll() {
+    const imageLinks = document.querySelectorAll('#previews a');
+
+    if (imageLinks.length === 0) {
+        alert('No images to download');
+        return;
+    }
+
+    const zip = new JSZip();
+
+    const downloadPromises = [];
+
+    for (let i = 0; i < imageLinks.length; i++) {
+        const link = imageLinks[i];
+        const imageURL = link.getAttribute('href');
+        const imageName = link.getAttribute('download');
+        const fileName = imageName.substring(imageName.lastIndexOf('/') + 1); // Extract original file name
+
+        const downloadPromise = fetch(imageURL)
+            .then(response => response.blob())
+            .then(blob => {
+                zip.file(fileName, blob);
+            });
+
+        downloadPromises.push(downloadPromise);
+    }
+
+    Promise.all(downloadPromises)
+        .then(() => {
+            zip.generateAsync({
+                    type: 'blob'
+                })
+                .then(blob => {
+                    // Save the ZIP file
+                    const zipFileName = 'processed_images.zip';
+                    saveAs(blob, zipFileName);
+                });
+        });
+}
+
+const downloadAllButton = document.querySelector('#downloadAllButton');
+downloadAllButton.addEventListener('click', downloadAll);
