@@ -1,18 +1,15 @@
-body {
+* {
     box-sizing: border-box;
+}
+
+html {
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
     background-color: #006a4c;
     margin: 0 auto;
     padding: 20px;
-}
-
-input[type=file] {
-
-    opacity: 0;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 99999999;
-    cursor: pointer;
 }
 
 img {
@@ -20,33 +17,14 @@ img {
     max-width: 100%;
 }
 
-.dropTarget {
-    position: relative;
-    border: 3px dashed silver;
-    flex-basis: auto;
-    flex-grow: 20;
-    height: 200px;
+.shadow {
+    box-shadow: 0px 1px 12px 0px rgba(0, 106, 76, 0.3);
 }
 
-.dropTarget::before {
-    content: 'Drop files here';
-    color: silver;
-    font-size: 5vh;
-    height: 45px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    text-align: center;
-    pointer-events: none;
-    user-select: none;
-}
-
-.dropTarget:hover {
-    cursor: pointer;
-    background-color: #efefef;
+.wrapper {
+    max-width: 800px;
+    min-width: 300px;
+    margin: 0 auto;
 }
 
 .layout {
@@ -58,58 +36,184 @@ img {
     row-gap: 15px;
     border-radius: 7px;
     min-height: 300px;
-    max-width: 800px;
-    min-width: 340px;
     margin: 2% auto;
     padding: 15px;
     background-color: #FFFFFF;
-    -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+input[type=file] {
+    opacity: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 99999999;
+    cursor: pointer;
+}
+
+.dropTarget {
+    position: relative;
+    border: 2px dashed #9f9f9f;
+    border-radius: 7px;
+    flex-basis: auto;
+    flex-grow: 20;
+    height: 200px;
+}
+
+.dropTarget::before {
+    content: 'Drop files here';
+    color: #9f9f9f;
+    font-size: 5vh;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropTarget:hover {
+    cursor: pointer;
+    background-color: #efefef;
 }
 
 .download {
     display: block;
-    margin: 20px auto;
-    font-size: 20px;
+    font-size: 16px;
     color: #fff;
     font-weight: 700;
-    background-color: #000;
+    background-color: #4ebc97;
     border: none;
     outline: none;
-    padding: 15px 20px;
+    padding: 15px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .download:hover {
-    filter: invert(1);
+    background-color: #38876d;
 }
 
+.select-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.select-container label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333333;
+}
 
 select {
     padding: 10px;
     font-size: 16px;
-    border-radius: 10px;
+    border-color: transparent;
+    border-right: 5px solid transparent;
     cursor: pointer;
+    background-color: #4ebc97;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
 }
 
-#previews {
+select:focus {
+    outline: 0;
+}
+
+option {
+    border: none;
+}
+
+
+/* previews */
+.previews {
+    background-color: #fff;
+    width: 100%;
+    display: none;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 30px;
+    padding: 15px;
+    border-radius: 7px;
+}
+
+.previews__top {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 30px;
-    padding-bottom: 15px;
+    gap: 10px;
 }
 
-#previews>div {
-    box-sizing: border-box;
-    height: 240px;
-    width: 240px;
-    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.5);
+.previews__top p {
+    color: #333333;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.previews__el {
+    height: 75px;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    vertical-align: top;
+    gap: 15px;
     overflow: hidden;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.previews__el img {
+    height: 100%;
+    width: 65px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+.previews__el a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    height: 100%;
+    width: 65px;
+    background-image: url(./download-icon.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.previews__image {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 10px;
+}
+
+.previews__image p {
+   font-weight: 700;
+   color: #333333;
+   font-size: 14px;
+}
+
+.previews__el a:hover {
+    filter: grayscale(50%);
+}
+
+.warning {
+    display: none;
+}
+
+.warning .show {
+    display: block;
 }

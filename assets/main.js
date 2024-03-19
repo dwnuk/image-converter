@@ -1,14 +1,12 @@
 let refs = {};
-refs.imagePreviews = document.querySelector('#previews');
+refs.imagePreviews = document.querySelector('.previews');
 refs.fileSelector = document.querySelector('input[type=file]');
 refs.outputFormat = document.getElementById('outputFormat');
 
 function addImageBox(container) {
     let imageBox = document.createElement("div");
-    let progressBox = document.createElement("progress");
-    imageBox.appendChild(progressBox);
+    imageBox.classList.add('previews__el', 'shadow');
     container.appendChild(imageBox);
-
     return imageBox;
 }
 
@@ -18,6 +16,8 @@ function processFile(file, outputFormat) {
     }
 
     let imageBox = addImageBox(refs.imagePreviews);
+
+    refs.imagePreviews.style.display = "flex";
 
     // Load the data into an image
     new Promise(function (resolve, reject) {
@@ -60,14 +60,26 @@ function processFile(file, outputFormat) {
             });
         })
         .then(function (data) {
-            // Inject into the DOM
+            // Create link element
             let imageLink = document.createElement("a");
-
             imageLink.setAttribute("href", data.imageURL);
             imageLink.setAttribute('download', `${file.name.slice(0, -4)}.${outputFormat}`);
-            imageLink.appendChild(data.scaledImg);
 
-            imageBox.innerHTML = "";
+            let imgPreviewBox = document.createElement("div");
+            imgPreviewBox.classList.add('previews__image');
+
+            // create description element
+            let desc = document.createElement("p");
+            desc.innerHTML =  `${file.name.slice(0, -4)}.${outputFormat}`;
+
+            // Create scaled image element
+            let scaledImg = data.scaledImg;
+
+            imgPreviewBox.appendChild(scaledImg);
+            imgPreviewBox.appendChild(desc);
+
+            // Append elements to imageBox
+            imageBox.appendChild(imgPreviewBox);
             imageBox.appendChild(imageLink);
         });
 }
@@ -115,8 +127,9 @@ const dragDropArea = document.querySelector('.dropTarget');
 
 setDragDrop(dragDropArea, processFiles);
 
+
 function downloadAll() {
-    const imageLinks = document.querySelectorAll('#previews a');
+    const imageLinks = document.querySelectorAll('.previews a');
 
     if (imageLinks.length === 0) {
         alert('No images to download');

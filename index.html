@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style.css">
 </head>
+
+
+
 <body>
 
 
 
     <div class="wrapper">
-        <button id="downloadAllButton" class="download">Download All</button>
+
+        <h1>Online image converter</h1>
+
+
         <div class="layout">
             <!-- Dropdown menu for output format -->
             <div class="select-container">
-                <label for="outputFormat">Output Format:</label>
-                <select id="outputFormat">
+                <label for="outputFormat">Choose output format:</label>
+                <select id="outputFormat" class="shadow">
                     <option value="jpeg">JPEG</option>
                     <option value="png">PNG</option>
                     <option value="webp">WebP</option>
@@ -24,14 +34,24 @@
             </div>
 
             <div class="dropTarget">
-                <input type="file" multiple accept="image/*">
+                <input type="file" multiple accept="image/png, image/jpeg, image/webp" />
             </div>
-            <div id="previews"></div>
+        </div>
+
+        <div class="previews">
+            <div class="previews__top">
+                <p>Your images are ready. Enjoy!</p>
+                <button id="downloadAllButton" class="download shadow">Download all</button>
+            </div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="./assets/main.js"></script>
+
+
+
 </body>
+
 </html>
