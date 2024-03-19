@@ -27,6 +27,11 @@ img {
     margin: 0 auto;
 }
 
+h1 {
+    color: #ffffff;
+    text-align: center;
+}
+
 .layout {
     display: flex;
     flex-direction: column;
