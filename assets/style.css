@@ -210,10 +210,15 @@ option {
     filter: grayscale(50%);
 }
 
+
 .warning {
     display: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(230, 51, 51);
+   width: fit-content;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 10px;
 }
 
-.warning .show {
-    display: block;
-}
+

@@ -1,8 +1,10 @@
+// Define an object to store references to DOM elements
 let refs = {};
-refs.imagePreviews = document.querySelector('.previews');
-refs.fileSelector = document.querySelector('input[type=file]');
-refs.outputFormat = document.getElementById('outputFormat');
+refs.imagePreviews = document.querySelector('.previews'); // Reference to the container for image previews
+refs.fileSelector = document.querySelector('input[type=file]'); // Reference to the file input element
+refs.outputFormat = document.getElementById('outputFormat'); // Reference to the output format selection element
 
+// Function to add a new image box to the previews container
 function addImageBox(container) {
     let imageBox = document.createElement("div");
     imageBox.classList.add('previews__el', 'shadow');
@@ -15,9 +17,28 @@ function processFile(file, outputFormat) {
         return;
     }
 
-    let imageBox = addImageBox(refs.imagePreviews);
+    // Validate input file type
+    const allowedInputFormats = ['.png', '.jpg', '.jpeg'];
+    const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+    const warning = document.querySelector('.warning');
+if (!allowedInputFormats.includes(fileExtension)) {
+    warning.style.display = 'block'
+    warning.innerHTML = 'File type not supported';
+    return;
+} else if (fileExtension === '.' + outputFormat.toLowerCase()) {
+    warning.style.display = 'block'
+    warning.innerHTML = `File can't have the same format as choosen output`;
+    return;
+} else {
+    // Hide warning message if the file type and output format match
+    warning.style.display = 'none'
+}
 
-    refs.imagePreviews.style.display = "flex";
+
+
+    let imageBox = addImageBox(refs.imagePreviews); // Add a new image box
+
+    refs.imagePreviews.style.display = "flex"; // Display the previews container
 
     // Load the data into an image
     new Promise(function (resolve, reject) {
@@ -70,7 +91,7 @@ function processFile(file, outputFormat) {
 
             // create description element
             let desc = document.createElement("p");
-            desc.innerHTML =  `${file.name.slice(0, -4)}.${outputFormat}`;
+            desc.innerHTML = `${file.name.slice(0, -4)}.${outputFormat}`;
 
             // Create scaled image element
             let scaledImg = data.scaledImg;
@@ -84,6 +105,9 @@ function processFile(file, outputFormat) {
         });
 }
 
+
+
+// Function to process multiple files
 function processFiles(files) {
     const outputFormat = refs.outputFormat.value;
     for (let file of files) {
@@ -91,14 +115,15 @@ function processFiles(files) {
     }
 }
 
+// Event handler for file selector change
 function fileSelectorChanged() {
     processFiles(refs.fileSelector.files);
-    refs.fileSelector.value = "";
+    refs.fileSelector.value = ""; // Reset file selector value after processing files
 }
 
 refs.fileSelector.addEventListener("change", fileSelectorChanged);
 
-// Set up Drag and Drop
+// Drag and Drop functionality setup
 function dragenter(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -124,10 +149,9 @@ function setDragDrop(area, callback) {
 }
 
 const dragDropArea = document.querySelector('.dropTarget');
+setDragDrop(dragDropArea, processFiles); // Set up drag and drop for processing files
 
-setDragDrop(dragDropArea, processFiles);
-
-
+// Function to download all processed images as a zip file
 function downloadAll() {
     const imageLinks = document.querySelectorAll('.previews a');
 
@@ -136,8 +160,7 @@ function downloadAll() {
         return;
     }
 
-    const zip = new JSZip();
-
+    const zip = new JSZip(); // Create a new instance of JSZip for creating zip archive
     const downloadPromises = [];
 
     for (let i = 0; i < imageLinks.length; i++) {
@@ -149,7 +172,7 @@ function downloadAll() {
         const downloadPromise = fetch(imageURL)
             .then(response => response.blob())
             .then(blob => {
-                zip.file(fileName, blob);
+                zip.file(fileName, blob); // Add each image file to the zip archive
             });
 
         downloadPromises.push(downloadPromise);
@@ -163,10 +186,10 @@ function downloadAll() {
                 .then(blob => {
                     // Save the ZIP file
                     const zipFileName = 'processed_images.zip';
-                    saveAs(blob, zipFileName);
+                    saveAs(blob, zipFileName); // Save the generated zip file
                 });
         });
 }
 
 const downloadAllButton = document.querySelector('#downloadAllButton');
-downloadAllButton.addEventListener('click', downloadAll);
+downloadAllButton.addEventListener('click', downloadAll); // Add event listener to download all button
