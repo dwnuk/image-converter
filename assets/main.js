@@ -18,7 +18,7 @@ function processFile(file, outputFormat) {
     }
 
     // Validate input file type
-    const allowedInputFormats = ['.png', '.jpg', '.jpeg'];
+    const allowedInputFormats = ['.png', '.jpg', '.jpeg', '.webp'];
     const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
     const warning = document.querySelector('.warning');
 if (!allowedInputFormats.includes(fileExtension)) {

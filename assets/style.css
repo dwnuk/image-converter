@@ -39,7 +39,6 @@ h1 {
     align-items: stretch;
     align-content: stretch;
     row-gap: 15px;
-    border-radius: 7px;
     min-height: 300px;
     margin: 2% auto;
     padding: 15px;
@@ -58,7 +57,6 @@ input[type=file] {
 .dropTarget {
     position: relative;
     border: 2px dashed #9f9f9f;
-    border-radius: 7px;
     flex-basis: auto;
     flex-grow: 20;
     height: 200px;
