@@ -1,0 +1,64 @@
+.select-menu {
+    max-width: 330px;
+    position: relative;
+
+    .select-btn {
+        display: flex;
+        height: 55px;
+        background: #fff;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 400;
+        align-items: center;
+        cursor: pointer;
+        justify-content: space-between;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+            background: #f2f2f2;
+          }
+      }
+
+      .options {
+        position: absolute;
+        right: 0;
+        width: 200px;
+        overflow: hidden;
+        max-height: 0;
+        padding: 0 10px;
+        margin-top: 10px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 99999;
+        transition: max-height .5s, padding .3s;
+
+
+        li {
+            display: flex;
+            height: 55px;
+            width: 100%;
+            cursor: pointer;
+            padding: 0 16px;
+            align-items: center;
+            background: #fff;
+            font-size: 18px;
+            color: #333;
+
+            &:hover {
+                background: #f2f2f2;
+              }
+          }
+      }
+
+      &.active .options {
+        display: block;
+        max-height: 240px;
+        padding: 10px;
+      }
+  }
+
+
+
+
+
+

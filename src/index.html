@@ -13,34 +13,54 @@
 
 
 <body>
+
     <div class="wrapper">
 
-        <h1>Online image converter</h1>
+        <div class="converter">
+            <h1>Online image converter</h1>
 
-        <p class="warning"></p>
-        <div class="layout">
-            <!-- Dropdown menu for output format -->
-            <div class="select-container">
-                <label for="outputFormat">Choose output format:</label>
-                <select id="outputFormat" class="shadow">
-                    <option value="jpeg">JPEG</option>
-                    <option value="png">PNG</option>
-                    <option value="webp">WebP</option>
-                </select>
+            <p class="warning"></p>
+            <div class="convert-area">
+                <!-- Dropdown menu for output format -->
+                <div class="select-container">
+                    <p for="outputFormat">Choose output format:</p>
+
+                    <div class="select-menu">
+                        <div class="select-btn">
+                            <span class="sBtn-text">WebP</span>
+                            <i class="bx bx-chevron-down"></i>
+                        </div>
+
+                        <ul class="options">
+                            <li class="option option-text">
+                                JPG
+                            </li>
+                            <li class="option option-text">
+                                PNG
+                            </li>
+                            <li class="option option-text">
+                                WebP
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <div class="dropTarget">
+                    <input type="file" multiple accept="image/png, image/jpeg, image/webp" />
+                </div>
             </div>
 
-            <div class="dropTarget">
-                <input type="file" multiple accept="image/png, image/jpeg, image/webp" />
-            </div>
-        </div>
-
-        <div class="previews">
-            <div class="previews__top">
-                <p>Your images are ready. Enjoy!</p>
-                <button id="downloadAllButton" class="download shadow">Download all</button>
+            <div class="previews">
+                <div class="previews__top">
+                    <p>Your images are ready. Enjoy!</p>
+                    <button id="downloadAllButton" class="download shadow">Download all</button>
+                </div>
             </div>
         </div>
     </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>

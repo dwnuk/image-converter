@@ -2,7 +2,24 @@
 let refs = {};
 refs.imagePreviews = document.querySelector('.previews'); // Reference to the container for image previews
 refs.fileSelector = document.querySelector('input[type=file]'); // Reference to the file input element
-refs.outputFormat = document.getElementById('outputFormat'); // Reference to the output format selection element
+
+const optionMenu = document.querySelector(".select-menu"),
+    selectBtn = optionMenu.querySelector(".select-btn"),
+    options = optionMenu.querySelectorAll(".option"),
+    sBtn_text = optionMenu.querySelector(".sBtn-text");
+
+selectBtn.addEventListener("click", () =>
+    optionMenu.classList.toggle("active")
+);
+
+options.forEach((option) => {
+    option.addEventListener("click", () => {
+        let selectedOption = option.innerText;
+        sBtn_text.innerText = selectedOption;
+
+        optionMenu.classList.remove("active");
+    });
+});
 
 // Function to add a new image box to the previews container
 function addImageBox(container) {
@@ -21,38 +38,36 @@ function processFile(file, outputFormat) {
     const allowedInputFormats = ['.png', '.jpg', '.jpeg', '.webp'];
     const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
     const warning = document.querySelector('.warning');
-if (!allowedInputFormats.includes(fileExtension)) {
-    warning.style.display = 'block'
-    warning.innerHTML = 'File type not supported';
-    return;
-} else if (fileExtension === '.' + outputFormat.toLowerCase()) {
-    warning.style.display = 'block'
-    warning.innerHTML = `File can't have the same format as choosen output`;
-    return;
-} else {
-    // Hide warning message if the file type and output format match
-    warning.style.display = 'none'
-}
-
-
+    if (!allowedInputFormats.includes(fileExtension)) {
+        warning.style.display = 'block'
+        warning.innerHTML = 'File type not supported';
+        return;
+    } else if (fileExtension === '.' + outputFormat.toLowerCase()) {
+        warning.style.display = 'block'
+        warning.innerHTML = `File can't have the same format as choosen output`;
+        return;
+    } else {
+        // Hide warning message if the file type and output format match
+        warning.style.display = 'none'
+    }
 
     let imageBox = addImageBox(refs.imagePreviews); // Add a new image box
 
     refs.imagePreviews.style.display = "flex"; // Display the previews container
 
     // Load the data into an image
-    new Promise(function (resolve, reject) {
+    new Promise(function(resolve, reject) {
             let rawImage = new Image();
 
-            rawImage.addEventListener("load", function () {
+            rawImage.addEventListener("load", function() {
                 resolve(rawImage);
             });
 
             rawImage.src = URL.createObjectURL(file);
         })
-        .then(function (rawImage) {
+        .then(function(rawImage) {
             // Convert image to the desired format
-            return new Promise(function (resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 let canvas = document.createElement('canvas');
                 let ctx = canvas.getContext("2d");
 
@@ -60,17 +75,17 @@ if (!allowedInputFormats.includes(fileExtension)) {
                 canvas.height = rawImage.height;
                 ctx.drawImage(rawImage, 0, 0);
 
-                canvas.toBlob(function (blob) {
+                canvas.toBlob(function(blob) {
                     resolve(URL.createObjectURL(blob));
                 }, "image/" + outputFormat); // Output format
             });
         })
-        .then(function (imageURL) {
+        .then(function(imageURL) {
             // Load image for display on the page
-            return new Promise(function (resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 let scaledImg = new Image();
 
-                scaledImg.addEventListener("load", function () {
+                scaledImg.addEventListener("load", function() {
                     resolve({
                         imageURL,
                         scaledImg
@@ -80,7 +95,7 @@ if (!allowedInputFormats.includes(fileExtension)) {
                 scaledImg.setAttribute("src", imageURL);
             });
         })
-        .then(function (data) {
+        .then(function(data) {
             // Create link element
             let imageLink = document.createElement("a");
             imageLink.setAttribute("href", data.imageURL);
@@ -105,11 +120,9 @@ if (!allowedInputFormats.includes(fileExtension)) {
         });
 }
 
-
-
 // Function to process multiple files
 function processFiles(files) {
-    const outputFormat = refs.outputFormat.value;
+    const outputFormat = sBtn_text.innerText.toLowerCase(); // Get selected output format from custom select menu
     for (let file of files) {
         processFile(file, outputFormat); // Pass output format
     }
@@ -143,7 +156,7 @@ function drop(callback, e) {
 function setDragDrop(area, callback) {
     area.addEventListener("dragenter", dragenter, false);
     area.addEventListener("dragover", dragover, false);
-    area.addEventListener("drop", function (e) {
+    area.addEventListener("drop", function(e) {
         drop(callback, e);
     }, false);
 }
