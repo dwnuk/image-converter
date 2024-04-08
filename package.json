@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
     "dev": "webpack serve",
-    "pages": "npm run build && gh-pages -d dist"
+    "pages": "npm run build && gh-pages -d dist && rmdir /s /q dist"
   },
   "keywords": [],
   "author": "",
