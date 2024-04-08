@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    background-color: #006a4c;
+    background-image: url(../images/bg3.png);
     margin: 0 auto;
     padding: 20px;
 }
@@ -17,9 +17,7 @@ img {
     max-width: 100%;
 }
 
-.shadow {
-    box-shadow: 0px 1px 12px 0px rgba(0, 106, 76, 0.3);
-}
+
 
 .wrapper {
     min-height: 100vh;
@@ -54,7 +52,8 @@ h1 {
     min-height: 300px;
     margin: 2% auto;
     padding: 15px;
-    background-color: #FFFFFF;
+    background-color: rgba(53, 101, 133, 0.6);
+    backdrop-filter: blur(10px);
 }
 
 input[type=file] {
@@ -68,14 +67,14 @@ input[type=file] {
 
 .dropTarget {
     position: relative;
-    border: 2px dashed #9f9f9f;
+    border: 2px dashed #ffffff;
     flex-basis: auto;
     flex-grow: 20;
     height: 200px;
 
     &::before {
         content: 'Drop files here';
-        color: #9f9f9f;
+        color: #ffffff;
         font-size: 5vh;
         height: 100%;
         position: absolute;
@@ -94,7 +93,7 @@ input[type=file] {
 
     &:hover {
         cursor: pointer;
-        background-color: #efefef;
+        background-color: rgba(53, 101, 133, 0.6);
     }
 }
 
@@ -125,7 +124,7 @@ input[type=file] {
     p {
         font-size: 15px;
         font-weight: 600;
-        color: #333333;
+        color: #ffffff;
     }
 }
 
