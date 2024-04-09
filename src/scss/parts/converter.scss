@@ -35,11 +35,12 @@ img {
 }
 
 h1 {
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 700;
     color: #ffffff;
     text-align: center;
     margin-bottom: 25px;
+    text-shadow: 0 0 5px #000000;
 }
 
 .convert-area {
@@ -103,14 +104,14 @@ input[type=file] {
     font-size: 16px;
     color: #fff;
     font-weight: 700;
-    background-color: #4ebc97;
+    background-color: rgb(16, 103, 160);
     border: none;
     outline: none;
     padding: 15px;
     cursor: pointer;
 
     &:hover {
-        background-color: #38876d;
+        background-color: rgb(11 70 110);
     }
 }
 
@@ -152,13 +153,15 @@ option {
 
 /* previews */
 .previews {
-    background-color: #fff;
+    background-color: rgba(53, 101, 133, 0.6);
+    backdrop-filter: blur(10px);
     width: 100%;
     display: none;
     align-items: flex-start;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
     padding: 15px;
+    margin-bottom: 50px;
 
     &__top {
         width: 100%;
@@ -169,7 +172,7 @@ option {
         gap: 10px;
 
         p {
-            color: #333333;
+            color: #ffffff;
             font-weight: 700;
             font-size: 15px;
         }
@@ -183,7 +186,7 @@ option {
         align-items: center;
         gap: 15px;
         overflow: hidden;
-        padding: 10px;
+        padding: 10px 0;
 
         img {
             height: 100%;
@@ -193,17 +196,17 @@ option {
 
         a {
             display: block;
-            color: #fff;
             text-decoration: none;
-            height: 100%;
-            width: 65px;
-            background-image: url(../images/download-icon.png);
+            height: 40px;
+            width: 40px;
+            background-color: rgb(16, 103, 160);
+            background-image: url(../images/download-icon2.png);
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: 30px auto;
             background-position: center;
 
             &:hover {
-                filter: grayscale(50%);
+                background-color: rgb(11 70 110);
             }
         }
     }
@@ -216,7 +219,7 @@ option {
 
         p {
             font-weight: 700;
-            color: #333333;
+            color: #ffffff;
             font-size: 14px;
             word-wrap: break-word;
             max-width: 100%;
