@@ -51,7 +51,7 @@ h1 {
     align-content: stretch;
     row-gap: 15px;
     min-height: 300px;
-    margin: 2% auto;
+    margin: 4% auto;
     padding: 15px;
     background-color: rgba(53, 101, 133, 0.6);
     backdrop-filter: blur(10px);
@@ -192,6 +192,7 @@ option {
             height: 100%;
             width: 65px;
             object-fit: cover;
+            flex-shrink: 0;
         }
 
         a {
@@ -204,6 +205,7 @@ option {
             background-repeat: no-repeat;
             background-size: 30px auto;
             background-position: center;
+            flex-shrink: 0;
 
             &:hover {
                 background-color: rgb(11 70 110);
