@@ -45,6 +45,8 @@
   },
   "dependencies": {
     "@splidejs/splide-extension-auto-scroll": "^0.5.3",
-    "gsap": "^3.12.2"
+    "file-saver": "^2.0.5",
+    "gsap": "^3.12.2",
+    "jszip": "^3.10.1"
   }
 }

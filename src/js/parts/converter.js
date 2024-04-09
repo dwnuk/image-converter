@@ -1,3 +1,6 @@
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
+
 // Define an object to store references to DOM elements
 let refs = {};
 refs.imagePreviews = document.querySelector('.previews'); // Reference to the container for image previews
