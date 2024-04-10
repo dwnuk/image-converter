@@ -1,5 +1,6 @@
 //import script
 import './parts/converter';
+import './parts/switch';
 
 
 //import styles

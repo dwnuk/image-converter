@@ -1,0 +1,36 @@
+.switch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+
+
+
+    div {
+        cursor: pointer;
+        background-color: rgb(16, 103, 160);
+        padding: 10px;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+
+        &.active {
+            background-color: rgb(11 70 110);
+        }
+
+        &:hover {
+            background-color: rgb(11 70 110);
+        }
+    }
+}
+
+.converter, .cropper {
+    display: none;
+    &.active {
+        display: block;
+    }
+}
+
+
+
