@@ -25,6 +25,13 @@ document.getElementById('imageInput').onchange = function (event) {
                     viewMode: 2, // Display mode
                     zoomable: false, // Disable zooming
                     background: true, // Show background
+                    crop(event) { // Crop event handler
+                        var data = cropper.getData();
+                        // Display crop data
+                        document.getElementById('cropDataDisplay').innerHTML =
+                            'Width: ' + Math.round(data.width) + 'px' + '<br>' +
+                            'Height: ' + Math.round(data.height) + 'px' + '<br>';
+                    }
 
                 });
             } else {
