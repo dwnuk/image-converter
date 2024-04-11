@@ -31,6 +31,8 @@ document.getElementById('imageInput').onchange = function (event) {
                         document.getElementById('cropDataDisplay').innerHTML =
                             'Width: ' + Math.round(data.width) + 'px' + '<br>' +
                             'Height: ' + Math.round(data.height) + 'px' + '<br>';
+                            updatePreview();
+                            updatePreview();
                     }
 
                 });
@@ -73,3 +75,27 @@ document.getElementById('downloadButton').addEventListener('click', function () 
     downloadLink.download = 'cropped_image.png';
     downloadLink.click(); // Trigger download link
 });
+
+// Function to update live preview of cropped image
+function updatePreview() {
+    if (!cropper) return; // Return if no cropper instance
+
+    var previewCanvas = document.getElementById('preview');
+    var previewCtx = previewCanvas.getContext('2d');
+
+    var canvas = cropper.getCroppedCanvas();
+    if (!canvas) return; // Return if no cropped canvas available
+
+    var croppedImageData = canvas.toDataURL();
+    var previewImage = new Image();
+    previewImage.src = croppedImageData;
+    previewImage.onload = function () {
+        var aspectRatio = canvas.width / canvas.height;
+        var previewWidth = 200;
+        var previewHeight = previewWidth / aspectRatio;
+        previewCanvas.width = previewWidth;
+        previewCanvas.height = previewHeight;
+        previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+        previewCtx.drawImage(previewImage, 0, 0, previewWidth, previewHeight);
+    };
+}
