@@ -68,7 +68,10 @@
 
         <div class="cropper">
             <input type="file" id="imageInput" class="cropper__input">
-            <div id="cropDataDisplay"></div>
+            <div id="cropDataDisplay">
+                <input type="number" id="dataWidth" name="width" min="1" placeholder="width">
+                <input type="number" id="dataHeight" name="height" min="1" placeholder="height">
+            </div>
             <div id="image-container">
                 <!-- Image will be dynamically added here -->
             </div>

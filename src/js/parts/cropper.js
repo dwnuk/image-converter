@@ -3,6 +3,26 @@ import Cropper from 'cropperjs';
 // Initialize Cropper.js instance
 var cropper = null;
 
+// Function to update Cropper instance with new width
+function updateCropperWidth(width) {
+    if (cropper) {
+        var newData = {
+            width: width,
+        };
+        cropper.setData(newData);
+    }
+}
+
+// Function to update Cropper instance with new height
+function updateCropperHeight(height) {
+    if (cropper) {
+        var newData = {
+            height: height,
+        };
+        cropper.setData(newData);
+    }
+}
+
 // Event listener for file input change
 document.getElementById('imageInput').onchange = function (event) {
     var files = event.target.files;
@@ -18,6 +38,9 @@ document.getElementById('imageInput').onchange = function (event) {
             imageContainer.innerHTML = ''; // Clear existing image
             imageContainer.appendChild(img);
 
+            var dataWidth = document.getElementById('dataWidth');
+            var dataHeight = document.getElementById('dataHeight');
+
             // If cropper instance doesn't exist, create one
             if (!cropper) {
                 cropper = new Cropper(img, {
@@ -28,11 +51,21 @@ document.getElementById('imageInput').onchange = function (event) {
                     crop(event) { // Crop event handler
                         var data = cropper.getData();
                         // Display crop data
-                        document.getElementById('cropDataDisplay').innerHTML =
-                            'Width: ' + Math.round(data.width) + 'px' + '<br>' +
-                            'Height: ' + Math.round(data.height) + 'px' + '<br>';
-                    }
 
+                        dataWidth.value = Math.round(data.width);
+                        dataHeight.value = Math.round(data.height);
+                    }
+                });
+
+                // Event listener for input change to update Cropper width
+
+                dataWidth.addEventListener('input', function() {
+                    var width = parseFloat(this.value);
+                    updateCropperWidth(width);
+                });
+                dataHeight.addEventListener('input', function() {
+                    var height = parseFloat(this.value);
+                    updateCropperHeight(height);
                 });
             } else {
                 // Replace existing cropper image with new one
@@ -43,6 +76,7 @@ document.getElementById('imageInput').onchange = function (event) {
 
     reader.readAsDataURL(image); // Read image file as data URL
 };
+
 
 // Event listener for crop button click
 document.getElementById('cropButton').addEventListener('click', function () {
