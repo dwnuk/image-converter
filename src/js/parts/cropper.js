@@ -32,7 +32,6 @@ document.getElementById('imageInput').onchange = function (event) {
                             'Width: ' + Math.round(data.width) + 'px' + '<br>' +
                             'Height: ' + Math.round(data.height) + 'px' + '<br>';
                             updatePreview();
-                            updatePreview();
                     }
 
                 });
